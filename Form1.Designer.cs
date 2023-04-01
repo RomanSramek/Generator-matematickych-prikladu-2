@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zastavPočítáníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +76,9 @@
             this.checkBoxStopky = new System.Windows.Forms.CheckBox();
             this.checkBoxZobrazitOstatní = new System.Windows.Forms.CheckBox();
             this.gBnastavení = new System.Windows.Forms.GroupBox();
+            this.checkBoxZvuky = new System.Windows.Forms.CheckBox();
+            this.labelKonec = new System.Windows.Forms.Label();
+            this.stopky = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.gBnastavení.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +146,7 @@
             this.smazatHistoriiToolStripMenuItem.Name = "smazatHistoriiToolStripMenuItem";
             this.smazatHistoriiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.smazatHistoriiToolStripMenuItem.Text = "Smazat historii";
+            this.smazatHistoriiToolStripMenuItem.Click += new System.EventHandler(this.smazatHistoriiToolStripMenuItem_Click);
             // 
             // buttonStart
             // 
@@ -160,7 +165,7 @@
             this.textBoxVýsledek.Location = new System.Drawing.Point(280, 100);
             this.textBoxVýsledek.MaxLength = 3;
             this.textBoxVýsledek.Name = "textBoxVýsledek";
-            this.textBoxVýsledek.Size = new System.Drawing.Size(110, 49);
+            this.textBoxVýsledek.Size = new System.Drawing.Size(120, 49);
             this.textBoxVýsledek.TabIndex = 6;
             this.textBoxVýsledek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxVýsledek.Visible = false;
@@ -226,6 +231,7 @@
             this.labelZnámka.Size = new System.Drawing.Size(177, 135);
             this.labelZnámka.TabIndex = 11;
             this.labelZnámka.Text = "1*";
+            this.labelZnámka.Visible = false;
             this.labelZnámka.Click += new System.EventHandler(this.labelZnámka_Click);
             // 
             // progressBar
@@ -246,7 +252,6 @@
             this.textBoxHistorie.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxHistorie.Size = new System.Drawing.Size(760, 109);
             this.textBoxHistorie.TabIndex = 13;
-            this.textBoxHistorie.Visible = false;
             // 
             // LstopkyT
             // 
@@ -375,7 +380,7 @@
             this.labelJménoHráče.AutoSize = true;
             this.labelJménoHráče.BackColor = System.Drawing.Color.White;
             this.labelJménoHráče.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelJménoHráče.Location = new System.Drawing.Point(2, 50);
+            this.labelJménoHráče.Location = new System.Drawing.Point(19, 52);
             this.labelJménoHráče.Name = "labelJménoHráče";
             this.labelJménoHráče.Size = new System.Drawing.Size(0, 23);
             this.labelJménoHráče.TabIndex = 16;
@@ -394,6 +399,7 @@
             this.checkBoxPlus.Text = "Sčítat";
             this.checkBoxPlus.UseVisualStyleBackColor = true;
             this.checkBoxPlus.Visible = false;
+            this.checkBoxPlus.CheckedChanged += new System.EventHandler(this.checkBoxPlus_CheckedChanged);
             // 
             // checkBoxMínus
             // 
@@ -408,6 +414,7 @@
             this.checkBoxMínus.Text = "Odečítat";
             this.checkBoxMínus.UseVisualStyleBackColor = true;
             this.checkBoxMínus.Visible = false;
+            this.checkBoxMínus.CheckedChanged += new System.EventHandler(this.checkBoxMínus_CheckedChanged);
             // 
             // checkBoxNásobit
             // 
@@ -422,6 +429,7 @@
             this.checkBoxNásobit.Text = "Násobit";
             this.checkBoxNásobit.UseVisualStyleBackColor = true;
             this.checkBoxNásobit.Visible = false;
+            this.checkBoxNásobit.CheckedChanged += new System.EventHandler(this.checkBoxNásobit_CheckedChanged);
             // 
             // checkBoxDělit
             // 
@@ -436,6 +444,7 @@
             this.checkBoxDělit.Text = "Dělit";
             this.checkBoxDělit.UseVisualStyleBackColor = true;
             this.checkBoxDělit.Visible = false;
+            this.checkBoxDělit.CheckedChanged += new System.EventHandler(this.checkBoxDělit_CheckedChanged);
             // 
             // textBoxČ1od
             // 
@@ -447,6 +456,7 @@
             this.textBoxČ1od.TabIndex = 21;
             this.textBoxČ1od.Text = "0";
             this.textBoxČ1od.Visible = false;
+            this.textBoxČ1od.TextChanged += new System.EventHandler(this.textBoxČ1od_TextChanged);
             // 
             // textBoxČ1do
             // 
@@ -469,6 +479,7 @@
             this.textBoxČ2od.TabIndex = 23;
             this.textBoxČ2od.Text = "0";
             this.textBoxČ2od.Visible = false;
+            this.textBoxČ2od.TextChanged += new System.EventHandler(this.textBoxČ2od_TextChanged);
             // 
             // textBoxČ2do
             // 
@@ -526,6 +537,7 @@
             this.textBoxZadejJméno.Text = "Zadej jméno";
             this.textBoxZadejJméno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxZadejJméno.Visible = false;
+            this.textBoxZadejJméno.Click += new System.EventHandler(this.textBoxZadejJméno_Click);
             this.textBoxZadejJméno.TextChanged += new System.EventHandler(this.textBoxZadejJméno_TextChanged);
             // 
             // labelPočetPříkladů
@@ -572,16 +584,18 @@
             this.checkBoxZobrazitOstatní.Checked = true;
             this.checkBoxZobrazitOstatní.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxZobrazitOstatní.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBoxZobrazitOstatní.Location = new System.Drawing.Point(229, 148);
+            this.checkBoxZobrazitOstatní.Location = new System.Drawing.Point(197, 148);
             this.checkBoxZobrazitOstatní.Name = "checkBoxZobrazitOstatní";
             this.checkBoxZobrazitOstatní.Size = new System.Drawing.Size(226, 23);
             this.checkBoxZobrazitOstatní.TabIndex = 32;
             this.checkBoxZobrazitOstatní.Text = "Zobrazit ostatní údaje";
             this.checkBoxZobrazitOstatní.UseVisualStyleBackColor = true;
             this.checkBoxZobrazitOstatní.Visible = false;
+            this.checkBoxZobrazitOstatní.CheckedChanged += new System.EventHandler(this.checkBoxZobrazitOstatní_CheckedChanged);
             // 
             // gBnastavení
             // 
+            this.gBnastavení.Controls.Add(this.checkBoxZvuky);
             this.gBnastavení.Controls.Add(this.textBoxZadejJméno);
             this.gBnastavení.Controls.Add(this.checkBoxZobrazitOstatní);
             this.gBnastavení.Controls.Add(this.labelPočetPříkladů);
@@ -590,11 +604,42 @@
             this.gBnastavení.Controls.Add(this.buttonUložNastavení);
             this.gBnastavení.Location = new System.Drawing.Point(0, 24);
             this.gBnastavení.Name = "gBnastavení";
-            this.gBnastavení.Size = new System.Drawing.Size(615, 188);
+            this.gBnastavení.Size = new System.Drawing.Size(355, 188);
             this.gBnastavení.TabIndex = 33;
             this.gBnastavení.TabStop = false;
             this.gBnastavení.Text = "Nastavení";
             this.gBnastavení.Visible = false;
+            // 
+            // checkBoxZvuky
+            // 
+            this.checkBoxZvuky.AutoSize = true;
+            this.checkBoxZvuky.Checked = true;
+            this.checkBoxZvuky.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxZvuky.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBoxZvuky.Location = new System.Drawing.Point(429, 148);
+            this.checkBoxZvuky.Name = "checkBoxZvuky";
+            this.checkBoxZvuky.Size = new System.Drawing.Size(73, 23);
+            this.checkBoxZvuky.TabIndex = 33;
+            this.checkBoxZvuky.Text = "Zvuky";
+            this.checkBoxZvuky.UseVisualStyleBackColor = true;
+            this.checkBoxZvuky.Visible = false;
+            // 
+            // labelKonec
+            // 
+            this.labelKonec.AutoSize = true;
+            this.labelKonec.BackColor = System.Drawing.Color.White;
+            this.labelKonec.Font = new System.Drawing.Font("Consolas", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelKonec.Location = new System.Drawing.Point(120, 151);
+            this.labelKonec.Name = "labelKonec";
+            this.labelKonec.Size = new System.Drawing.Size(130, 47);
+            this.labelKonec.TabIndex = 34;
+            this.labelKonec.Text = "KONEC";
+            this.labelKonec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelKonec.Visible = false;
+            // 
+            // stopky
+            // 
+            this.stopky.Tick += new System.EventHandler(this.stopky_Tick);
             // 
             // oknoProgramu
             // 
@@ -603,6 +648,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(784, 361);
+            this.Controls.Add(this.labelKonec);
             this.Controls.Add(this.textBoxČ2od);
             this.Controls.Add(this.labelVýsledek);
             this.Controls.Add(this.textBoxČ2do);
@@ -612,7 +658,6 @@
             this.Controls.Add(this.checkBoxNásobit);
             this.Controls.Add(this.checkBoxMínus);
             this.Controls.Add(this.checkBoxPlus);
-            this.Controls.Add(this.labelJménoHráče);
             this.Controls.Add(this.LStopky);
             this.Controls.Add(this.LVýsledekT);
             this.Controls.Add(this.LstopkyT);
@@ -637,6 +682,7 @@
             this.Controls.Add(this.labelZnaménko);
             this.Controls.Add(this.labelZnámka);
             this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.labelJménoHráče);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.MinimumSize = new System.Drawing.Size(800, 400);
@@ -708,6 +754,9 @@
         private System.Windows.Forms.CheckBox checkBoxStopky;
         private System.Windows.Forms.CheckBox checkBoxZobrazitOstatní;
         private System.Windows.Forms.GroupBox gBnastavení;
+        private System.Windows.Forms.CheckBox checkBoxZvuky;
+        private System.Windows.Forms.Label labelKonec;
+        private System.Windows.Forms.Timer stopky;
     }
 }
 

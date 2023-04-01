@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -19,15 +21,167 @@ namespace Generáto_matematických_příkladů_2
             InitializeComponent();
             // nastavení standardní hodnoty
             celkovýPočetPříkladů = 10;
-            celkovýPočetPříkladůProgres = 10;
+            // otevření souboru historie
+            using (var sr = new StreamReader("../Uložené_výsledky_matematika_2.txt"))
+            {
+                textBoxHistorie.Text = (sr.ReadToEnd());
+            }
         }
 
 
         // velikost okna, fontu a posunu v proměnné
         int velikostOknaY, velikostOknaX, velikostFontu, poziceZnaménko, poziceČ2, poziceRovnáSe, pozicePoleVýsledek,
             poziceTlačítko, poziceZnámka, pozicePoleHistorie, početSprávnýchVýsledků, početŠpatnýchVýsledku,
-            celkovýPočetPříkladů, celkovýPočetPříkladůProgres;
-        double procentuálníÚspěšnost;
+            celkovýPočetPříkladů, celkovýPočetProgress;
+        
+        double procentuálníÚspěšnost, celkovýPočetPříkladůProProcenta, SprávnéPříklady;
+
+        private void checkBoxMínus_CheckedChanged(object sender, EventArgs e)
+        {
+            if ( checkBoxPlus.Checked == false && checkBoxNásobit.Checked == false && checkBoxDělit.Checked == false)
+            {
+                checkBoxPlus.Checked = true;
+                
+            }    
+
+        }
+
+        private void checkBoxNásobit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPlus.Checked == false && checkBoxMínus.Checked == false && checkBoxDělit.Checked == false)
+            {
+                checkBoxDělit.Checked = true;
+
+            }
+        }
+
+        private void checkBoxDělit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPlus.Checked == false && checkBoxMínus.Checked == false && checkBoxNásobit.Checked == false)
+            {
+                checkBoxNásobit.Checked = true;
+
+            }
+        }
+
+        private void checkBoxZobrazitOstatní_CheckedChanged(object sender, EventArgs e)
+        {
+            // zobrazení ostatních údajů
+            if(checkBoxZobrazitOstatní.Checked == true)
+            {
+                LPočet.Visible = true;
+                LPočetT.Visible = true;
+                LZbývající.Visible = true;
+                LZbývajícíT.Visible = true;
+                LSprávné.Visible = true;
+                LSprávnéT.Visible = true;
+                LŠpatně.Visible = true;
+                LŠpatněT.Visible = true;
+                LÚspěšnost.Visible = true;
+                LVýsledekT.Visible = true;
+            }
+            else
+            {
+                LPočet.Visible = false;
+                LPočetT.Visible = false;
+                LZbývající.Visible = false;
+                LZbývajícíT.Visible = false;
+                LSprávné.Visible = false;
+                LSprávnéT.Visible = false;
+                LŠpatně.Visible = false;
+                LŠpatněT.Visible = false;
+                LÚspěšnost.Visible = false;
+                LVýsledekT.Visible = false;
+            }
+
+        }
+
+        private void smazatHistoriiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // přepsání veškerého textu
+            using (var zapisovac = File.CreateText("../Uložené_výsledky_matematika_2.txt"))
+            {
+                zapisovac.Write("");
+
+            }
+            // otevření txt souboru
+            using (var sr = new StreamReader("../Uložené_výsledky_matematika_2.txt"))
+            {
+                textBoxHistorie.Text = (sr.ReadToEnd());
+            }
+
+            historie = null;
+            historieProŠpatnýVýsledek = null;
+            špatnýVýsledekDoHistorie = null;
+
+
+
+
+
+
+            if (checkBoxZvuky.Checked == true)
+            {
+                // Přehrání zvuku pokud se požaduje
+                SoundPlayer melodie = new SoundPlayer(Properties.Resources.smazaniHistorie);
+                melodie.Play();
+
+                
+            }
+
+        }
+
+        private void textBoxZadejJméno_Click(object sender, EventArgs e)
+        {
+            textBoxZadejJméno.Text = null;
+        }
+
+        private void textBoxČ1od_TextChanged(object sender, EventArgs e)
+        {
+            //Pokud je zádané číslo 1od větší jak číslo 1do  
+            int čísloOD1 = Convert.ToInt32(textBoxČ1od.Text);
+            int čísloDO1 = Convert.ToInt32(textBoxČ1do.Text);
+
+            if (čísloOD1 > čísloDO1)
+            {
+                čísloDO1 = čísloOD1 + 1;
+                textBoxČ1do.Text = Convert.ToString(čísloDO1);
+            } 
+        }
+
+        private void textBoxČ2od_TextChanged(object sender, EventArgs e)
+        {
+            //Pokud je zádané číslo 2od větší jak číslo 2do  
+            int čísloOD2 = Convert.ToInt32(textBoxČ2od.Text);
+            int čísloDO2 = Convert.ToInt32(textBoxČ2do.Text);
+
+            if (čísloOD2 > čísloDO2)
+            {
+                čísloDO2 = čísloOD2 + 1;
+                textBoxČ2do.Text = Convert.ToString(čísloDO2);
+            }
+
+
+        }
+
+        // Stopky
+        DateTime start;
+        TimeSpan ts;
+        private void stopky_Tick(object sender, EventArgs e)
+        {
+            // stopky
+            ts = DateTime.Now - start;
+            LstopkyT.Text = String.Format("{0}", ts);
+        }
+
+
+        private void checkBoxPlus_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxNásobit.Checked == false && checkBoxMínus.Checked == false && checkBoxDělit.Checked == false)
+            {
+                checkBoxMínus.Checked = true;
+
+            }
+        }
 
         private void labelZnámka_Click(object sender, EventArgs e)
         {
@@ -37,36 +191,102 @@ namespace Generáto_matematických_příkladů_2
             switch (skóre)
             {
                 case 0:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._5);
+                        melodie.Play();
+                    }
                     MessageBox.Show("S tím už nic neuděláš");
                     break;
                 case 1:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._5);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Tohle je na pováženou!");
                     break;
                 case 2:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._4);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Tohle bylo o fous");
                     break;
                 case 3:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._4);
+                        melodie.Play();
+                    }
                     MessageBox.Show("No... dá se to");
                     break;
                 case 4:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._3);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Pořád se dá co zlepšovat");
                     break;
                 case 5:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._3);
+                        melodie.Play();
+                    }
                     MessageBox.Show("No šlo by to lépe");
                     break;
                 case 6:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._2);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Pořád se dá trénovat");
                     break;
                 case 7:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._2);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Dobrý výsledek");
                     break;
                 case 8:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._1);
+                        melodie.Play();
+                    }
                     MessageBox.Show("To ujde");
                     break;
                 case 9:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._1);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Jen kousek ti chyběl k nejlepšímu výsledku");
                     break;
                 case 10:
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                        // Přehrání zvuku pokud se požaduje
+                        SoundPlayer melodie = new SoundPlayer(Properties.Resources._1);
+                        melodie.Play();
+                    }
                     MessageBox.Show("Skvěle! Lépe už to nejde!!!");
                     break;
 
@@ -96,9 +316,15 @@ namespace Generáto_matematických_příkladů_2
         {
             try
             {
+
                 celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
                 LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
-                celkovýPočetPříkladůProgres = celkovýPočetPříkladů;
+                
+                if( celkovýPočetPříkladů <= 0)
+                {
+                    celkovýPočetPříkladů = 1;
+                    textBoxPočetPříkladů.Text = Convert.ToString(celkovýPočetPříkladů);
+                }
             }
             catch
             {
@@ -108,12 +334,34 @@ namespace Generáto_matematických_příkladů_2
 
         private void zastavPočítáníToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // vymazání proměnné pro historii
+            špatnýVýsledekDoHistorie = null;
+
             // resetování do původních hodnot
             celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
             LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
-            celkovýPočetPříkladůProgres = celkovýPočetPříkladů;
+            procentuálníÚspěšnost = 0;
             progressBar.Value = 0;
 
+            celkovýPočetPříkladůProProcenta = 0;
+            SprávnéPříklady = 0;
+            početSprávnýchVýsledků = 0;
+            labelZnámka.Visible = false;
+
+            // Stopky STOP
+            stopky.Enabled = false;
+            ts = DateTime.Now - start;
+            LstopkyT.Text = String.Format("{0}", ts);
+
+            //Vynulování STOPEK
+            ts = DateTime.Now - start;
+            LstopkyT.Text = String.Format("00:00:00.0000000");
+
+            LSprávnéT.Text = "0";
+            LZbývajícíT.Text = "0";
+            LSprávnéT.Text = "0";
+            LŠpatněT.Text = "0";
+            LVýsledekT.Text = "0";
 
             // změna viditelnosti prvků
             labelPříkladČ1.Visible = false;
@@ -134,7 +382,8 @@ namespace Generáto_matematických_příkladů_2
             číslo2Do = Convert.ToInt32(textBoxČ2do.Text);
 
             LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
-
+            // ukrytí tlačítka konec 
+            labelKonec.Visible = false;
 
 
 
@@ -172,7 +421,7 @@ namespace Generáto_matematických_příkladů_2
 
             if (gBnastavení.Visible == true)
             {
-
+                checkBoxZvuky.Visible = true;
                 checkBoxStopky.Visible = true;
                 checkBoxZobrazitOstatní.Visible = true;
                 textBoxZadejJméno.Visible = true;
@@ -187,7 +436,7 @@ namespace Generáto_matematických_příkladů_2
                 labelPočetPříkladů.Visible = true;
                 textBoxPočetPříkladů.Visible = true;
                 buttonUložNastavení.Visible = true;
-                labelJménoHráče.Visible = true;
+                labelJménoHráče.Visible = false;
             }
             else
             {
@@ -205,24 +454,93 @@ namespace Generáto_matematických_příkladů_2
                 labelPočetPříkladů.Visible = false;
                 textBoxPočetPříkladů.Visible = false;
                 buttonUložNastavení.Visible = false;
-                labelJménoHráče.Visible = false;
+                labelJménoHráče.Visible = true;
             }
+
+            // resetování do původních hodnot
+            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
+            
+            procentuálníÚspěšnost = 0;
+            progressBar.Value = 0;
+
+            celkovýPočetPříkladůProProcenta = 0;
+            SprávnéPříklady = 0;
+            početSprávnýchVýsledků = 0;
+
+            // ochrana před možností že uživatel zadá mení hodnotu čísel DO
+            // načtení zadání rozsahu náhodných čísel
+            číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
+            číslo1Do = Convert.ToInt32(textBoxČ1do.Text);
+            číslo2Od = Convert.ToInt32(textBoxČ2od.Text);
+            číslo2Do = Convert.ToInt32(textBoxČ2do.Text);
+
+            if (číslo1Od > číslo1Do)
+            {
+                číslo1Do = číslo1Od + 1;
+                textBoxČ1do.Text = Convert.ToString(číslo1Do);
+            }
+            if (číslo2Od > číslo2Do)
+            {
+                číslo2Do = číslo2Od + 1;
+                textBoxČ2do.Text = Convert.ToString(číslo2Do);
+            }
+
+
+
+            LSprávnéT.Text = "0";
+            LZbývajícíT.Text = textBoxPočetPříkladů.Text;
+            LSprávnéT.Text = "0";
+            LŠpatněT.Text = "0";
+            LVýsledekT.Text = "0";
+
+            // změna viditelnosti prvků
+            labelPříkladČ1.Visible = false;
+            labelZnaménko.Visible = false;
+            labelPříkladČ2.Visible = false;
+            labelRovnáSe.Visible = false;
+            textBoxVýsledek.Visible = false;
+            buttonZkontroluj.Visible = false;
+            buttonStart.Visible = true;
+
+            //vypsání počtu zbývajících příkladů
+            LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
+
+            // načtení zadání rozsahu náhodných čísel
+            číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
+            číslo1Do = Convert.ToInt32(textBoxČ1do.Text);
+            číslo2Od = Convert.ToInt32(textBoxČ2od.Text);
+            číslo2Do = Convert.ToInt32(textBoxČ2do.Text);
+
+            LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
 
         }
 
         private void nastaveníToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // vypnutí počítání a vrácení do původních hodnot
+            // vymazání proměnné pro historii
+            špatnýVýsledekDoHistorie = null;
+
+            // Stopky STOP
+            stopky.Enabled = false;
+            ts = DateTime.Now - start;
+            LstopkyT.Text = String.Format("{0}", ts);
+
+            //Vynulování STOPEK
+            ts = DateTime.Now - start;
+            LstopkyT.Text = String.Format("00:00:00.0000000");
 
 
+            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
             
-            
+
             // zobrazení nastavení
             gBnastavení.Visible = !gBnastavení.Visible;
 
             if (gBnastavení.Visible == true)
             {
-                
+                checkBoxZvuky.Visible = true;
                 checkBoxStopky.Visible = true;
                 checkBoxZobrazitOstatní.Visible = true;
                 textBoxZadejJméno.Visible = true;
@@ -237,7 +555,7 @@ namespace Generáto_matematických_příkladů_2
                 labelPočetPříkladů.Visible = true;
                 textBoxPočetPříkladů.Visible = true;
                 buttonUložNastavení.Visible = true;
-                labelJménoHráče.Visible = true;
+                labelJménoHráče.Visible = false;
             }
             else
             {
@@ -255,21 +573,58 @@ namespace Generáto_matematických_příkladů_2
                 labelPočetPříkladů.Visible = false;
                 textBoxPočetPříkladů.Visible = false;
                 buttonUložNastavení.Visible = false;
-                labelJménoHráče.Visible = false;
+                labelJménoHráče.Visible = true;
             }
-            
+
+
+            // resetování do původních hodnot
+            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
+            procentuálníÚspěšnost = 0;
+            progressBar.Value = 0;
+
+            celkovýPočetPříkladůProProcenta = 0;
+            SprávnéPříklady = 0;
+            početSprávnýchVýsledků = 0;
+
+            labelKonec.Visible = false;
+
+
+            LSprávnéT.Text = "0";
+            LZbývajícíT.Text = textBoxPočetPříkladů.Text;
+            LSprávnéT.Text = "0";
+            LŠpatněT.Text = "0";
+            LVýsledekT.Text = "0";
+
+            // změna viditelnosti prvků
+            labelPříkladČ1.Visible = false;
+            labelZnaménko.Visible = false;
+            labelPříkladČ2.Visible = false;
+            labelRovnáSe.Visible = false;
+            textBoxVýsledek.Visible = false;
+            buttonZkontroluj.Visible = false;
+            buttonStart.Visible = true;
+
+            //vypsání počtu zbývajících příkladů
+            LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
+
+            // načtení zadání rozsahu náhodných čísel
+            číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
+            číslo1Do = Convert.ToInt32(textBoxČ1do.Text);
+            číslo2Od = Convert.ToInt32(textBoxČ2od.Text);
+            číslo2Do = Convert.ToInt32(textBoxČ2do.Text);
+
+            LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
+
+            // schování známky 
+            labelZnámka.Visible = false;
 
         }
 
         private void buttonZkontroluj_Click(object sender, EventArgs e)
         {
-            
-            
-            try
-            {
-
-                // načtení napsaného výsledku
-                zadanýVýsledek = Convert.ToInt32(textBoxVýsledek.Text);
+            // načtení napsaného výsledku
+            zadanýVýsledek = Convert.ToInt32(textBoxVýsledek.Text);
 
                 // kontrola výsledku
                 if (VÝSLEDEK == zadanýVýsledek)
@@ -287,9 +642,43 @@ namespace Generáto_matematických_příkladů_2
                     //vypsání počtu zbývajících příkladů
                     LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
 
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                    // Přehrání zvuku pokud se požaduje
+                    SoundPlayer melodie = new SoundPlayer(Properties.Resources.SpravnaOdpoved);
+                    melodie.Play();
+                    }
+                    
+
                 }
                 else
                 {
+                //Zapsání špatně spočítaného příkladu do promměné
+                    špatnýVýsledekDoHistorie += labelPříkladČ1.Text + labelZnaménko.Text + labelPříkladČ2.Text + " ≠ " + zadanýVýsledek + " || = " + VÝSLEDEK + "   ";
+                 //Historie
+                 // smazání historie
+                    using (var zapisovac = File.CreateText("../Uložené_výsledky_matematika_2.txt"))
+                    {
+                     zapisovac.Write("");
+
+                    }
+                    
+                 // zapsání informace
+                    using (var zapisovac = File.AppendText("../Uložené_výsledky_matematika_2.txt"))
+                    {
+                     zapisovac.WriteLine(historieProŠpatnýVýsledek + " Špatné výsledky: " + špatnýVýsledekDoHistorie);
+                     // zapsání původních hodnot aby byl nový text vždy nahoře
+                     zapisovac.WriteLine(historie);
+
+                     //zapisovac.Flush();
+                    }
+                    // znovu otevření souboru historie
+                    using (var sr = new StreamReader("../Uložené_výsledky_matematika_2.txt"))
+                    {
+                    textBoxHistorie.Text = (sr.ReadToEnd());
+                    }
+
+
                     // (pro zobrazení) MessageBox.Show("špatně");
                     //uložení špatné odpovědi
                     početŠpatnýchVýsledku += 1;
@@ -301,6 +690,15 @@ namespace Generáto_matematických_příkladů_2
 
                     //vypsání počtu zbývajících příkladů
                     LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
+
+
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                     // Přehrání zvuku pokud se požaduje
+                     SoundPlayer melodie = new SoundPlayer(Properties.Resources.SpatnaOdpoved);
+                     melodie.Play();
+                    }
+
                 }
 
                 textBoxVýsledek.Text = null;
@@ -311,12 +709,12 @@ namespace Generáto_matematických_příkladů_2
 
 
                 // změna hodnoty progresbaru 
-                progressBar.Value = (celkovýPočetPříkladůProgres - celkovýPočetPříkladů)*10;
+                progressBar.Value = (100 / celkovýPočetProgress) * (celkovýPočetProgress - celkovýPočetPříkladů);
 
                 // výpočet procentuální úspěšnosti 
 
-                double celkovýPočetPříkladůProProcenta = Convert.ToDouble(textBoxPočetPříkladů.Text);
-                double SprávnéPříklady = Convert.ToDouble(početSprávnýchVýsledků);
+                celkovýPočetPříkladůProProcenta = Convert.ToDouble(textBoxPočetPříkladů.Text);
+                SprávnéPříklady = Convert.ToDouble(početSprávnýchVýsledků);
                 procentuálníÚspěšnost = (100 / celkovýPočetPříkladůProProcenta) * SprávnéPříklady;
                 LVýsledekT.Text = Convert.ToString(procentuálníÚspěšnost);
 
@@ -324,15 +722,6 @@ namespace Generáto_matematických_příkladů_2
                 // číslo 1 je + , 2 je - , 3 je x , 4 je : 
                 // výpočet je proveden po vygenerování znaménka
                 // rozhodl jsem se pro metodu if i když bych mohl použít switch
-
-
-                // UKONČENÍ POČÍTÁNÍ
-                if (celkovýPočetPříkladů == 0)
-                {
-                    MessageBox.Show("KONEC");
-                }
-
-
                 do
                 {
                     náhodnéZnaménko = náhodnéČíslo.Next(1, 4+1);
@@ -429,11 +818,118 @@ namespace Generáto_matematických_příkladů_2
                         break;
                     }
                 } while (true);
-            }
-            catch
-            {
 
-            }
+                // UKONČENÍ POČÍTÁNÍ
+                if (celkovýPočetPříkladů == 0)
+                {
+                    // Stopky STOP
+                    stopky.Enabled = false;
+                    ts = DateTime.Now - start;
+                    LstopkyT.Text = String.Format("{0}", ts);
+
+                // improvizace při řešení ,,nepřesného progressBar"
+                progressBar.Value = 100;
+
+                    if (checkBoxZvuky.Checked == true)
+                    {
+                    // Přehrání zvuku pokud se požaduje
+                    SoundPlayer melodie = new SoundPlayer(Properties.Resources.tada);
+                    melodie.Play();
+                    }
+
+                 
+                    double skóre = procentuálníÚspěšnost / 10;
+                
+                    switch (skóre)
+                    {
+                     case 0:
+                        labelZnámka.ForeColor = Color.Red;
+                        labelZnámka.Text = "5";
+
+
+                        break;
+                     case 1:
+                        labelZnámka.ForeColor = Color.Red;
+                        labelZnámka.Text = "5";
+
+
+                        break;
+                     case 2:
+                        labelZnámka.ForeColor = Color.OrangeRed;
+                        labelZnámka.Text = "4-";
+
+
+                        break;
+                     case 3:
+                        labelZnámka.ForeColor = Color.Orange;
+                        labelZnámka.Text = "4";
+
+
+                        break;
+                     case 4:
+                        labelZnámka.ForeColor = Color.Orange;
+                        labelZnámka.Text = "3-";
+
+
+                        break;
+                     case 5:
+                        labelZnámka.ForeColor = Color.Yellow;
+                        labelZnámka.Text = "3";
+
+
+                        break;
+                     case 6:
+                        labelZnámka.ForeColor = Color.YellowGreen;
+                        labelZnámka.Text = "2-";
+
+
+                        break;
+                     case 7:
+                        labelZnámka.ForeColor = Color.GreenYellow;
+                        labelZnámka.Text = "2";
+
+
+                        break;
+                     case 8:
+                        labelZnámka.ForeColor = Color.Green;
+                        labelZnámka.Text = "1-";
+
+
+                        break;
+                     case 9:
+                        labelZnámka.ForeColor = Color.Green;
+                        labelZnámka.Text = "1";
+
+
+                        break;
+                     case 10:
+                        labelZnámka.ForeColor = Color.Gold;
+                        labelZnámka.Text = "1*";
+
+
+                        break;
+
+                     default:
+                        
+                        break;
+                    }
+                 // zobrazení známky
+                 labelZnámka.Visible = true;
+                 // skyrytí tlačítek a příkladu
+                 buttonZkontroluj.Visible = false;
+                 
+                 labelPříkladČ1.Visible = false;
+                 labelPříkladČ2.Visible = false;
+                 labelZnaménko.Visible = false;
+                 labelRovnáSe.Visible = false;
+                 textBoxVýsledek.Visible = false;
+                 // zobrazení tlačítka start a textu konec
+                 buttonStart.Visible = true;
+                 labelKonec.Visible = true;
+
+                }
+            
+            
 
             
         }
@@ -454,6 +950,8 @@ namespace Generáto_matematických_příkladů_2
             //Změna pozice prvků podle velikosti okna
             poziceZnaménko = (velikostFontu*2) + 60;
             labelZnaménko.Location = new Point(poziceZnaménko, 120);
+            // label KONEC podle znaménka
+            labelKonec.Location = new Point(poziceZnaménko, 120);
 
             poziceČ2 = (velikostFontu*4) + 40;
             labelPříkladČ2.Location = new Point(poziceČ2, 120);
@@ -512,6 +1010,10 @@ namespace Generáto_matematických_příkladů_2
             labelRovnáSe.Font = new Font("Consolas", velikostFontu, FontStyle.Bold);
             labelZnámka.Font = new Font("Times New Roman", velikostFontu * 3, FontStyle.Bold);
 
+            // velikost labelKONEC podle znaménka
+            labelKonec.Font = new Font("Consolas", velikostFontu, FontStyle.Bold);
+
+
             textBoxVýsledek.Font = new Font("Consolas", velikostFontu, FontStyle.Bold);
 
             // změna délky progresbar 
@@ -529,16 +1031,116 @@ namespace Generáto_matematických_příkladů_2
 
 
         }
+
+
         //proměnná náhody
         Random náhodnéČíslo = new Random();
         int číslo1Od, číslo1Do, číslo2Od, číslo2Do, ČÍSLO1, ČÍSLO2, ČÍSLO3,
             náhodnéZnaménko, VÝSLEDEK, zadanýVýsledek;
+        string historie, historieProŠpatnýVýsledek, špatnýVýsledekDoHistorie;
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            //vymazání proměnných
+            historieProŠpatnýVýsledek = null;
+            špatnýVýsledekDoHistorie = null;
+
+            //Historie
+            // Načtení historie do proměnné
+            using (var sr = new StreamReader("../Uložené_výsledky_matematika_2.txt"))
+            {
+                // uložení původních hodnot do proměnné
+                historie = (sr.ReadToEnd());
+            }
+            // smazání historie
+            using (var zapisovac = File.CreateText("../Uložené_výsledky_matematika_2.txt"))
+            {
+                zapisovac.Write("");
+            }
+            // zapsání informace
+            using (var zapisovac = File.AppendText("../Uložené_výsledky_matematika_2.txt"))
+            {
+                // Vytvoření proměné času
+                string datumAčas = DateTime.Now.ToString("dd.MM.yyyy - HH:mm:ss");
+
+                zapisovac.WriteLine("Datum: "+ datumAčas + " - Jméno: " +textBoxZadejJméno.Text);
+                // vytvoření proměnné ke které se budou přidávat špatné výsledky na jednom řádku
+                historieProŠpatnýVýsledek = "Datum: "+ datumAčas + " - Jméno: " +textBoxZadejJméno.Text;
+
+                // zapsání původních hodnot aby byl nový text vždy nahoře
+                zapisovac.WriteLine(historie);
+
+                zapisovac.Flush();
+            }
+            // znovu otevření souboru historie
+            using (var sr = new StreamReader("../Uložené_výsledky_matematika_2.txt"))
+            {
+                textBoxHistorie.Text = (sr.ReadToEnd());
+            }
+
             try
             {
-                
+                if (checkBoxZvuky.Checked == true)
+                {
+                    // Přehrání zvuku pokud se požaduje
+                    SoundPlayer melodie = new SoundPlayer(Properties.Resources.Start);
+                    melodie.Play();
+                }
+
+                //Vynulování STOPEK
+                ts = DateTime.Now - start;
+                LstopkyT.Text = String.Format("00:00:00.0000000");
+
+                // zapnutí stopek
+                stopky.Enabled = true;
+                start = DateTime.Now;
+                LstopkyT.Text = "00:00:00.0000000";
+
+
+                // Reset zobrazení 
+                celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+                LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
+                labelKonec.Visible = false;
+                labelZnámka.Visible = false;
+                procentuálníÚspěšnost = 0;
+                progressBar.Value = 0;
+                celkovýPočetPříkladůProProcenta = 0;
+                SprávnéPříklady = 0;
+                početSprávnýchVýsledků = 0;
+                labelZnámka.Visible = false;
+                LSprávnéT.Text = "0";
+                LZbývajícíT.Text = textBoxPočetPříkladů.Text;
+                LSprávnéT.Text = "0";
+                LŠpatněT.Text = "0";
+                LVýsledekT.Text = "0";
+
+                // změna viditelnosti prvků
+                labelPříkladČ1.Visible = false;
+                labelZnaménko.Visible = false;
+                labelPříkladČ2.Visible = false;
+                labelRovnáSe.Visible = false;
+                textBoxVýsledek.Visible = false;
+                buttonZkontroluj.Visible = false;
+                buttonStart.Visible = true;
+
+                //vypsání počtu zbývajících příkladů
+                LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
+
+                // načtení zadání rozsahu náhodných čísel
+                číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
+                číslo1Do = Convert.ToInt32(textBoxČ1do.Text);
+                číslo2Od = Convert.ToInt32(textBoxČ2od.Text);
+                číslo2Do = Convert.ToInt32(textBoxČ2do.Text);
+
+
+
+                LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
+                // ukrytí tlačítka konec 
+                labelKonec.Visible = false;
+
+
+
+
                 //zobrazení a skrytí tlačítek
                 buttonZkontroluj.Visible = true;
                 buttonStart.Visible = false;
@@ -553,6 +1155,11 @@ namespace Generáto_matematických_příkladů_2
                 //vypsání počtu zbývajících příkladů
                 LPočetT.Text = Convert.ToString(celkovýPočetPříkladů);
 
+
+                // Proměnná pro progressbar
+                celkovýPočetProgress = celkovýPočetPříkladů;
+
+
                 // načtení zadání rozsahu náhodných čísel
                 číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
                 číslo1Do = Convert.ToInt32(textBoxČ1do.Text);
@@ -562,6 +1169,9 @@ namespace Generáto_matematických_příkladů_2
                 // vygenerování prvního a druhého čísla
                 ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do+1);
                 ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do+1);
+
+                // přepnutí do textového pole!!!!!!!!!!!!!!!!!!!!
+                textBoxVýsledek.Focus();
 
 
                 // náhodné generování znamének podle výběru uživatele
@@ -627,13 +1237,11 @@ namespace Generáto_matematických_příkladů_2
                     {
                         if (ČÍSLO1 == 0 || ČÍSLO2 == 0)// pokud by na jedno z náhodných čísel byla 0
                         {
-                            // změna čísel OD na 1
-                            číslo1Od += 1;
-                            číslo2Od += 1;
+                           
 
-                            // opětovné vygenerování prvního a druhého čísla
-                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do+1);
-                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do+1);
+                            // opětovné vygenerování prvního a druhého čísla. 
+                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od+1, číslo1Do);
+                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od+1, číslo2Do);
 
                             //opětovné zobrazení čísel a znaménka pro uživatele
                             labelPříkladČ1.Text = Convert.ToString(ČÍSLO3);
