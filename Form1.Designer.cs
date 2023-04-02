@@ -77,7 +77,7 @@
             this.checkBoxZobrazitOstatní = new System.Windows.Forms.CheckBox();
             this.gBnastavení = new System.Windows.Forms.GroupBox();
             this.checkBoxMínusVýsledek = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelJméno = new System.Windows.Forms.Label();
             this.checkBoxZvuky = new System.Windows.Forms.CheckBox();
             this.labelKonec = new System.Windows.Forms.Label();
             this.stopky = new System.Windows.Forms.Timer(this.components);
@@ -602,7 +602,7 @@
             // gBnastavení
             // 
             this.gBnastavení.Controls.Add(this.checkBoxMínusVýsledek);
-            this.gBnastavení.Controls.Add(this.label1);
+            this.gBnastavení.Controls.Add(this.labelJméno);
             this.gBnastavení.Controls.Add(this.checkBoxZvuky);
             this.gBnastavení.Controls.Add(this.textBoxZadejJméno);
             this.gBnastavení.Controls.Add(this.checkBoxZobrazitOstatní);
@@ -632,16 +632,16 @@
             this.checkBoxMínusVýsledek.UseVisualStyleBackColor = true;
             this.checkBoxMínusVýsledek.Visible = false;
             // 
-            // label1
+            // labelJméno
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(69, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 28);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "Zadej jméno";
-            this.label1.Visible = false;
+            this.labelJméno.AutoSize = true;
+            this.labelJméno.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelJméno.Location = new System.Drawing.Point(69, 16);
+            this.labelJméno.Name = "labelJméno";
+            this.labelJméno.Size = new System.Drawing.Size(155, 28);
+            this.labelJméno.TabIndex = 34;
+            this.labelJméno.Text = "Zadej jméno";
+            this.labelJméno.Visible = false;
             // 
             // checkBoxZvuky
             // 
@@ -795,7 +795,7 @@
         private System.Windows.Forms.CheckBox checkBoxZvuky;
         private System.Windows.Forms.Label labelKonec;
         private System.Windows.Forms.Timer stopky;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelJméno;
         private System.Windows.Forms.CheckBox checkBoxMínusVýsledek;
         private System.Windows.Forms.Timer timerČervená;
     }
