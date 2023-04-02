@@ -106,13 +106,13 @@
     <None Include="Resources\SpatnaOdpoved.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SpravnaOdpoved.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Start.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tada.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SpravnaOdpoved.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
