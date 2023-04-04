@@ -197,6 +197,22 @@ namespace Generáto_matematických_příkladů_2
             timerČervená.Enabled = false;
         }
 
+        private void bŠedá_Click(object sender, EventArgs e)
+        {
+            //změna barvy pozadí okna a polí
+            this.BackColor = Color.Gray;
+            textBoxVýsledek.BackColor = Color.LightGray;
+            textBoxHistorie.BackColor = Color.LightGray;
+        }
+
+        private void bBílá_Click(object sender, EventArgs e)
+        {
+            //změna barvy pozadí okna a polí
+            this.BackColor = Color.White;
+            textBoxVýsledek.BackColor = Color.White;
+            textBoxHistorie.BackColor = Color.WhiteSmoke;
+        }
+
         private void labelZnámka_Click(object sender, EventArgs e)
         {
             // easter egg v podobě textu podle úspěšnosti
@@ -415,6 +431,7 @@ namespace Generáto_matematických_příkladů_2
             gBnastavení.Visible = false;
             if (gBnastavení.Visible == true)
             {
+                labelJméno.Visible = true;
                 checkBoxMínusVýsledek.Visible = true;
                 checkBoxZvuky.Visible = true;
                 checkBoxStopky.Visible = true;
@@ -435,6 +452,7 @@ namespace Generáto_matematických_příkladů_2
             }
             else
             {
+                labelJméno.Visible = false;
                 checkBoxMínusVýsledek.Visible = false;
                 checkBoxStopky.Visible = false;
                 checkBoxZobrazitOstatní.Visible = false;
@@ -517,6 +535,7 @@ namespace Generáto_matematických_příkladů_2
             smazatHistoriiToolStripMenuItem.Enabled = true;
             if (gBnastavení.Visible == true)
             {
+                labelJméno.Visible = true;
                 checkBoxMínusVýsledek.Visible = true;
                 checkBoxZvuky.Visible = true;
                 checkBoxStopky.Visible = true;
@@ -537,6 +556,7 @@ namespace Generáto_matematických_příkladů_2
             }
             else
             {
+                labelJméno.Visible = false;
                 checkBoxMínusVýsledek.Visible = false;
                 checkBoxStopky.Visible = false;
                 checkBoxZobrazitOstatní.Visible = false;
