@@ -55,7 +55,7 @@ namespace Generáto_matematických_příkladů_2
                 checkBoxPlus.Checked = true;
             }    
         }
-
+// chybí checkBoxPlus!!!!!!!!!!!!!!!!!!!!!!!!
         private void checkBoxNásobit_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxPlus.Checked == false && checkBoxMínus.Checked == false && checkBoxDělit.Checked == false)
