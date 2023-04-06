@@ -21,7 +21,7 @@ namespace Generáto_matematických_příkladů_2
         {
             InitializeComponent();
             // nastavení standardní hodnoty
-            celkovýPočetPříkladů = 10;
+           
             // otevření souboru historie
             try
             {

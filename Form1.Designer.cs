@@ -77,14 +77,14 @@
             this.checkBoxStopky = new System.Windows.Forms.CheckBox();
             this.checkBoxZobrazitOstatní = new System.Windows.Forms.CheckBox();
             this.gBnastavení = new System.Windows.Forms.GroupBox();
+            this.bBílá = new System.Windows.Forms.Button();
+            this.bŠedá = new System.Windows.Forms.Button();
             this.checkBoxMínusVýsledek = new System.Windows.Forms.CheckBox();
             this.labelJméno = new System.Windows.Forms.Label();
             this.checkBoxZvuky = new System.Windows.Forms.CheckBox();
             this.labelKonec = new System.Windows.Forms.Label();
             this.stopky = new System.Windows.Forms.Timer(this.components);
             this.timerČervená = new System.Windows.Forms.Timer(this.components);
-            this.bŠedá = new System.Windows.Forms.Button();
-            this.bBílá = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.gBnastavení.SuspendLayout();
             this.SuspendLayout();
@@ -389,7 +389,7 @@
             // labelJménoHráče
             // 
             this.labelJménoHráče.AutoSize = true;
-            this.labelJménoHráče.BackColor = System.Drawing.Color.White;
+            this.labelJménoHráče.BackColor = System.Drawing.Color.Transparent;
             this.labelJménoHráče.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelJménoHráče.Location = new System.Drawing.Point(19, 52);
             this.labelJménoHráče.Name = "labelJménoHráče";
@@ -620,11 +620,33 @@
             this.gBnastavení.Controls.Add(this.buttonUložNastavení);
             this.gBnastavení.Location = new System.Drawing.Point(0, 24);
             this.gBnastavení.Name = "gBnastavení";
-            this.gBnastavení.Size = new System.Drawing.Size(296, 188);
+            this.gBnastavení.Size = new System.Drawing.Size(379, 188);
             this.gBnastavení.TabIndex = 33;
             this.gBnastavení.TabStop = false;
             this.gBnastavení.Text = "Nastavení";
             this.gBnastavení.Visible = false;
+            // 
+            // bBílá
+            // 
+            this.bBílá.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.bBílá.Location = new System.Drawing.Point(624, 68);
+            this.bBílá.Name = "bBílá";
+            this.bBílá.Size = new System.Drawing.Size(75, 23);
+            this.bBílá.TabIndex = 37;
+            this.bBílá.Text = "Bílá";
+            this.bBílá.UseVisualStyleBackColor = false;
+            this.bBílá.Click += new System.EventHandler(this.bBílá_Click);
+            // 
+            // bŠedá
+            // 
+            this.bŠedá.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.bŠedá.Location = new System.Drawing.Point(624, 97);
+            this.bŠedá.Name = "bŠedá";
+            this.bŠedá.Size = new System.Drawing.Size(75, 23);
+            this.bŠedá.TabIndex = 36;
+            this.bŠedá.Text = "Šedá";
+            this.bŠedá.UseVisualStyleBackColor = false;
+            this.bŠedá.Click += new System.EventHandler(this.bŠedá_Click);
             // 
             // checkBoxMínusVýsledek
             // 
@@ -643,6 +665,7 @@
             // labelJméno
             // 
             this.labelJméno.AutoSize = true;
+            this.labelJméno.BackColor = System.Drawing.Color.Transparent;
             this.labelJméno.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelJméno.Location = new System.Drawing.Point(69, 16);
             this.labelJméno.Name = "labelJméno";
@@ -686,28 +709,6 @@
             // 
             this.timerČervená.Interval = 300;
             this.timerČervená.Tick += new System.EventHandler(this.timerČervená_Tick);
-            // 
-            // bŠedá
-            // 
-            this.bŠedá.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.bŠedá.Location = new System.Drawing.Point(624, 97);
-            this.bŠedá.Name = "bŠedá";
-            this.bŠedá.Size = new System.Drawing.Size(75, 23);
-            this.bŠedá.TabIndex = 36;
-            this.bŠedá.Text = "Šedá";
-            this.bŠedá.UseVisualStyleBackColor = false;
-            this.bŠedá.Click += new System.EventHandler(this.bŠedá_Click);
-            // 
-            // bBílá
-            // 
-            this.bBílá.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.bBílá.Location = new System.Drawing.Point(624, 68);
-            this.bBílá.Name = "bBílá";
-            this.bBílá.Size = new System.Drawing.Size(75, 23);
-            this.bBílá.TabIndex = 37;
-            this.bBílá.Text = "Bílá";
-            this.bBílá.UseVisualStyleBackColor = false;
-            this.bBílá.Click += new System.EventHandler(this.bBílá_Click);
             // 
             // oknoProgramu
             // 
