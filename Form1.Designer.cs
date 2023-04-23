@@ -620,7 +620,7 @@
             this.gBnastavení.Controls.Add(this.buttonUložNastavení);
             this.gBnastavení.Location = new System.Drawing.Point(0, 24);
             this.gBnastavení.Name = "gBnastavení";
-            this.gBnastavení.Size = new System.Drawing.Size(379, 188);
+            this.gBnastavení.Size = new System.Drawing.Size(624, 188);
             this.gBnastavení.TabIndex = 33;
             this.gBnastavení.TabStop = false;
             this.gBnastavení.Text = "Nastavení   iamtheone";

@@ -473,7 +473,16 @@ namespace Generáto_matematických_příkladů_2
             }
 
             // resetování do původních hodnot
-            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            try
+            {
+                celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            }
+            catch
+            {
+                celkovýPočetPříkladů = 10;
+                textBoxPočetPříkladů.Text = Convert.ToString(celkovýPočetPříkladů);
+
+            }
             LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
             
             procentuálníÚspěšnost = 0;
@@ -1123,6 +1132,7 @@ namespace Generáto_matematických_příkladů_2
                 číslo2Do = 10;
                 textBoxČ2do.Text = ("10");
             }
+            
 
             //ochrana pokud jsou čísla DO menší než čísla OD
             if(číslo1Do < číslo1Od)
@@ -1138,7 +1148,14 @@ namespace Generáto_matematických_příkladů_2
             }
 
             // uložení celkového počtu příkladů
-            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            try
+            {
+                celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            }
+            catch
+            {
+                celkovýPočetPříkladů = 10;
+            }
 
             //zobrazení ,,vypsání" znamének do historie
             if (checkBoxPlus.Checked == true)
