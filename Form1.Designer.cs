@@ -1,4 +1,4 @@
-﻿namespace Generáto_matematických_příkladů_2
+﻿namespace Generátor_matematických_příkladů_2
 {
     partial class oknoProgramu
     {

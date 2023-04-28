@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
-namespace Generáto_matematických_příkladů_2
+namespace Generátor_matematických_příkladů_2
 {
     public partial class oknoProgramu : Form
     {
@@ -1062,7 +1062,7 @@ namespace Generáto_matematických_příkladů_2
 
         //proměnná náhody
         Random náhodnéČíslo = new Random();
-        int číslo1Od, číslo1Do, číslo2Od, číslo2Do, ČÍSLO1, ČÍSLO2, ČÍSLO3,
+        int číslo1Od, číslo1Do, číslo2Od, číslo2Do, ČÍSLO1, ČÍSLO2, 
             náhodnéZnaménko, VÝSLEDEK, zadanýVýsledek;
 
         string historie, historieProŠpatnýVýsledek, špatnýVýsledekDoHistorie, znaménkoHistorie, sChybou,
