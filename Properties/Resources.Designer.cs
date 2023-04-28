@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Generáto_matematických_příkladů_2.Properties {
+namespace Generátor_matematických_příkladů_2.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Generáto_matematických_příkladů_2.Properties {
         ///   Vrací instanci ResourceManager uloženou v mezipaměti použitou touto třídou.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Generáto_matematických_příkladů_2.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Generátor_matematických_příkladů_2.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         ///   vyhledání prostředků pomocí třídy prostředků se silnými typy.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream _1 {
+        public static System.IO.UnmanagedMemoryStream _1 {
             get {
                 return ResourceManager.GetStream("_1", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream _2 {
+        public static System.IO.UnmanagedMemoryStream _2 {
             get {
                 return ResourceManager.GetStream("_2", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream _3 {
+        public static System.IO.UnmanagedMemoryStream _3 {
             get {
                 return ResourceManager.GetStream("_3", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream _4 {
+        public static System.IO.UnmanagedMemoryStream _4 {
             get {
                 return ResourceManager.GetStream("_4", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream _5 {
+        public static System.IO.UnmanagedMemoryStream _5 {
             get {
                 return ResourceManager.GetStream("_5", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream EasterEgg {
+        public static System.IO.UnmanagedMemoryStream EasterEgg {
             get {
                 return ResourceManager.GetStream("EasterEgg", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream smazaniHistorie {
+        public static System.IO.UnmanagedMemoryStream smazaniHistorie {
             get {
                 return ResourceManager.GetStream("smazaniHistorie", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream SpatnaOdpoved {
+        public static System.IO.UnmanagedMemoryStream SpatnaOdpoved {
             get {
                 return ResourceManager.GetStream("SpatnaOdpoved", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream SpravnaOdpoved {
+        public static System.IO.UnmanagedMemoryStream SpravnaOdpoved {
             get {
                 return ResourceManager.GetStream("SpravnaOdpoved", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Start {
+        public static System.IO.UnmanagedMemoryStream Start {
             get {
                 return ResourceManager.GetStream("Start", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Generáto_matematických_příkladů_2.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.IO.UnmanagedMemoryStream podobný System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream tada {
+        public static System.IO.UnmanagedMemoryStream tada {
             get {
                 return ResourceManager.GetStream("tada", resourceCulture);
             }

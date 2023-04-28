@@ -1,4 +1,4 @@
-﻿namespace Generáto_matematických_příkladů_2
+﻿namespace Generátor_matematických_příkladů_2
 {
     partial class oknoProgramu
     {
@@ -507,12 +507,12 @@
             // 
             this.labelVýsledek.AutoSize = true;
             this.labelVýsledek.BackColor = System.Drawing.Color.Transparent;
-            this.labelVýsledek.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVýsledek.Location = new System.Drawing.Point(469, 252);
+            this.labelVýsledek.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelVýsledek.Location = new System.Drawing.Point(405, 215);
             this.labelVýsledek.Name = "labelVýsledek";
-            this.labelVýsledek.Size = new System.Drawing.Size(98, 23);
+            this.labelVýsledek.Size = new System.Drawing.Size(39, 20);
             this.labelVýsledek.TabIndex = 25;
-            this.labelVýsledek.Text = "Výsledek";
+            this.labelVýsledek.Text = "999";
             this.labelVýsledek.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelVýsledek.Visible = false;
             // 
@@ -620,10 +620,10 @@
             this.gBnastavení.Controls.Add(this.buttonUložNastavení);
             this.gBnastavení.Location = new System.Drawing.Point(0, 24);
             this.gBnastavení.Name = "gBnastavení";
-            this.gBnastavení.Size = new System.Drawing.Size(379, 188);
+            this.gBnastavení.Size = new System.Drawing.Size(624, 188);
             this.gBnastavení.TabIndex = 33;
             this.gBnastavení.TabStop = false;
-            this.gBnastavení.Text = "Nastavení";
+            this.gBnastavení.Text = "Nastavení   iamtheone";
             this.gBnastavení.Visible = false;
             // 
             // bBílá

@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
-namespace Generáto_matematických_příkladů_2
+namespace Generátor_matematických_příkladů_2
 {
     public partial class oknoProgramu : Form
     {
@@ -55,7 +55,7 @@ namespace Generáto_matematických_příkladů_2
                 checkBoxPlus.Checked = true;
             }    
         }
-// chybí checkBoxPlus!!!!!!!!!!!!!!!!!!!!!!!!
+
         private void checkBoxNásobit_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxPlus.Checked == false && checkBoxMínus.Checked == false && checkBoxDělit.Checked == false)
@@ -405,6 +405,7 @@ namespace Generáto_matematických_příkladů_2
         private void textBoxZadejJméno_TextChanged(object sender, EventArgs e)
         {
             labelJménoHráče.Text = ("Nyní počítá: " + textBoxZadejJméno.Text);
+
         }
 
         private void zobrazHistoriiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -472,7 +473,16 @@ namespace Generáto_matematických_příkladů_2
             }
 
             // resetování do původních hodnot
-            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            try
+            {
+                celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            }
+            catch
+            {
+                celkovýPočetPříkladů = 10;
+                textBoxPočetPříkladů.Text = Convert.ToString(celkovýPočetPříkladů);
+
+            }
             LZbývajícíT.Text = Convert.ToString(celkovýPočetPříkladů);
             
             procentuálníÚspěšnost = 0;
@@ -734,7 +744,7 @@ namespace Generáto_matematických_příkladů_2
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =("+");
 
-                        //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         break;
                     }
 
@@ -752,7 +762,7 @@ namespace Generáto_matematických_příkladů_2
                             labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                             labelZnaménko.Text =("-");
 
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         }
                         else
                         {
@@ -763,7 +773,7 @@ namespace Generáto_matematických_příkladů_2
                             labelPříkladČ1.Text = Convert.ToString(ČÍSLO2);
                             labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
                             labelZnaménko.Text =("-");
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         }
                         break;
                     }
@@ -780,7 +790,7 @@ namespace Generáto_matematických_příkladů_2
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =("×");
 
-                        //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
                         break;
                     }
@@ -788,40 +798,35 @@ namespace Generáto_matematických_příkladů_2
                     // 4 :
                     if (checkBoxDělit.Checked == true && náhodnéZnaménko == 4)
                     {
-                        // pokud by na jednom čísla byla 0
-                        if (ČÍSLO1 == 0 || ČÍSLO2 == 0)
+                        // dvě podmínky aby čísla od nebyla 0
+                        if (číslo1Od == 0)
                         {
-                            // změna čísel OD na 1
-                            číslo1Od = +1;
-                            číslo2Od = +1;
-
-                            // opětovné vygenerování prvního a druhého čísla
-                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do+1);
-                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do+1);
-
-                            //opětovné zobrazení čísel a znaménka pro uživatele
-                            labelPříkladČ1.Text = Convert.ToString(ČÍSLO3);
-                            labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
-                            labelZnaménko.Text =(":");
-
-                            // výpočet výsledku
-                            ČÍSLO3 = ČÍSLO1 * ČÍSLO2;
-                            VÝSLEDEK = ČÍSLO3 / ČÍSLO1;
-
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            číslo1Od = 1;
                         }
-                        else // pokud by na jednom čísle není 0 pokračuje se dál
+                        if (číslo2Od == 0)
                         {
-                            ČÍSLO3 = ČÍSLO1 * ČÍSLO2;
-                            VÝSLEDEK = ČÍSLO3 / ČÍSLO1;
-
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            číslo2Od = 1;
                         }
+
+                        //vygenerování prvního a druhého čísla. 
+                        ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do);
+                        ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do);
+                        //Vydělení čísel s podmínkou že jou dělitelné bezezbytku
+                        while (ČÍSLO1 % ČÍSLO2 != 0)
+                        {
+                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do);
+                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do);
+                        }
+
+                        VÝSLEDEK = ČÍSLO1 / ČÍSLO2;
 
                         //zobrazení čísel a znaménka pro uživatele
-                        labelPříkladČ1.Text = Convert.ToString(ČÍSLO3);
-                        labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
+                        labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
+                        labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =(":");
+
+
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
                         break;
                     }
@@ -837,6 +842,9 @@ namespace Generáto_matematických_příkladů_2
 
                     // uložení času do proměnné
                     stopkyH = LstopkyT.Text;
+
+                    // skyrytí nápovědy
+                    labelVýsledek.Visible = false;
 
 
                     // improvizace při řešení ,,nepřesného progressBar"
@@ -1012,6 +1020,7 @@ namespace Generáto_matematických_příkladů_2
             LŠpatněT.Location = new Point(620, pozicePoleHistorie - 24);
             LÚspěšnost.Location = new Point(660, pozicePoleHistorie - 20);
             LVýsledekT.Location = new Point(733, pozicePoleHistorie - 24);
+            labelVýsledek.Location = new Point(415, pozicePoleHistorie - 24);
 
             // zobrazení velikosti okna
             //label1.Text = Convert.ToString(velikostOknaX);
@@ -1053,7 +1062,7 @@ namespace Generáto_matematických_příkladů_2
 
         //proměnná náhody
         Random náhodnéČíslo = new Random();
-        int číslo1Od, číslo1Do, číslo2Od, číslo2Do, ČÍSLO1, ČÍSLO2, ČÍSLO3,
+        int číslo1Od, číslo1Do, číslo2Od, číslo2Do, ČÍSLO1, ČÍSLO2, 
             náhodnéZnaménko, VÝSLEDEK, zadanýVýsledek;
 
         string historie, historieProŠpatnýVýsledek, špatnýVýsledekDoHistorie, znaménkoHistorie, sChybou,
@@ -1074,6 +1083,17 @@ namespace Generáto_matematických_příkladů_2
             SprávnéPříklady = 0;
             početSprávnýchVýsledků = 0;
             znaménkoHistorie = null;
+
+
+            // zobrazení výsledku po zadání správného jména
+            if (textBoxZadejJméno.Text == "iamtheone")
+            {
+                labelVýsledek.Visible = true;
+            }
+            else
+            {
+                labelVýsledek.Visible = false;
+            }
 
             // načtení zadání rozsahu náhodných čísel
             try
@@ -1112,6 +1132,7 @@ namespace Generáto_matematických_příkladů_2
                 číslo2Do = 10;
                 textBoxČ2do.Text = ("10");
             }
+            
 
             //ochrana pokud jsou čísla DO menší než čísla OD
             if(číslo1Do < číslo1Od)
@@ -1127,7 +1148,14 @@ namespace Generáto_matematických_příkladů_2
             }
 
             // uložení celkového počtu příkladů
-            celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            try
+            {
+                celkovýPočetPříkladů = Convert.ToInt32(textBoxPočetPříkladů.Text);
+            }
+            catch
+            {
+                celkovýPočetPříkladů = 10;
+            }
 
             //zobrazení ,,vypsání" znamének do historie
             if (checkBoxPlus.Checked == true)
@@ -1249,7 +1277,7 @@ namespace Generáto_matematických_příkladů_2
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =("+");
 
-                        //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         break;
                     }
 
@@ -1267,7 +1295,7 @@ namespace Generáto_matematických_příkladů_2
                             labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                             labelZnaménko.Text =("-");
 
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         }
                         else
                         {
@@ -1278,7 +1306,7 @@ namespace Generáto_matematických_příkladů_2
                             labelPříkladČ1.Text = Convert.ToString(ČÍSLO2);
                             labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
                             labelZnaménko.Text =("-");
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
                         }
                         break;
                     }
@@ -1293,7 +1321,7 @@ namespace Generáto_matematických_příkladů_2
                         labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =("x");
-                        //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
                         break;
                     }
@@ -1301,35 +1329,35 @@ namespace Generáto_matematických_příkladů_2
                     // 4 :
                     if (checkBoxDělit.Checked == true && náhodnéZnaménko == 4)
                     {
-                        if (ČÍSLO1 == 0 || ČÍSLO2 == 0)// pokud by na jedno z náhodných čísel byla 0
+                        // dvě podmínky aby čísla od nebyla 0
+                        if (číslo1Od == 0)
                         {
-                            // opětovné vygenerování prvního a druhého čísla. 
-                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od+1, číslo1Do);
-                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od+1, číslo2Do);
-
-                            //opětovné zobrazení čísel a znaménka pro uživatele
-                            labelPříkladČ1.Text = Convert.ToString(ČÍSLO3);
-                            labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
-                            labelZnaménko.Text =(":");
-
-                            // výpočet výsledku
-                            ČÍSLO3 = ČÍSLO1 * ČÍSLO2;
-                            VÝSLEDEK = ČÍSLO3 / ČÍSLO1;
-
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            číslo1Od = 1;
                         }
-                        else // pokud ani jedno číslo není 0 pokračuje se dál
+                        if (číslo2Od == 0)
                         {
-                            ČÍSLO3 = ČÍSLO1 * ČÍSLO2;
-                            VÝSLEDEK = ČÍSLO3 / ČÍSLO1;
-
-                            //labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+                            číslo2Od = 1;
                         }
+
+                        //vygenerování prvního a druhého čísla. 
+                        ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do);
+                        ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do);
+                        //Vydělení čísel s podmínkou že jou dělitelné bezezbytku
+                        while (ČÍSLO1 % ČÍSLO2 != 0)
+                        {
+                            ČÍSLO1 = náhodnéČíslo.Next(číslo1Od, číslo1Do);
+                            ČÍSLO2 = náhodnéČíslo.Next(číslo2Od, číslo2Do);
+                        }
+
+                        VÝSLEDEK = ČÍSLO1 / ČÍSLO2;
 
                         //zobrazení čísel a znaménka pro uživatele
-                        labelPříkladČ1.Text = Convert.ToString(ČÍSLO3);
-                        labelPříkladČ2.Text = Convert.ToString(ČÍSLO1);
+                        labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
+                        labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
                         labelZnaménko.Text =(":");
+
+
+                        labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
                         break;
                     }
