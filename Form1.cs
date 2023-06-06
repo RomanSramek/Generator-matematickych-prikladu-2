@@ -213,6 +213,18 @@ namespace Generátor_matematických_příkladů_2
             textBoxHistorie.BackColor = Color.WhiteSmoke;
         }
 
+        private void textBoxVýsledek_TextChanged(object sender, EventArgs e)
+        {
+            string příklad = labelPříkladČ1.Text + labelZnaménko.Text + labelPříkladČ2.Text;
+            string Stringvýsledek = Convert.ToString(textBoxVýsledek.Text);
+            if (příklad == Stringvýsledek)
+            {
+                labelVýsledek.Visible = true;
+                textBoxVýsledek.Text = "";
+            }
+           
+        }
+
         private void labelZnámka_Click(object sender, EventArgs e)
         {
             // easter egg v podobě textu podle úspěšnosti
@@ -623,8 +635,21 @@ namespace Generátor_matematických_příkladů_2
         {
             try
             {
-                // načtení napsaného výsledku
+                // vrácení čísel OD do původní hodnoty
+                číslo1Od = Convert.ToInt32(textBoxČ1od.Text);
+                číslo2Od = Convert.ToInt32(textBoxČ2od.Text);
 
+                if (textBoxZadejJméno.Text == "iamtheone")
+                {
+                    labelVýsledek.Visible = true;
+                   
+                }
+                else
+                {
+                    labelVýsledek.Visible = false;
+                }
+
+                // načtení napsaného výsledku
                 zadanýVýsledek = Convert.ToInt32(textBoxVýsledek.Text);
 
                 // kontrola výsledku
@@ -788,7 +813,7 @@ namespace Generátor_matematických_příkladů_2
                         //zobrazení čísel a znaménka pro uživatele
                         labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
-                        labelZnaménko.Text =("×");
+                        labelZnaménko.Text =("*");
 
                         labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
@@ -823,7 +848,7 @@ namespace Generátor_matematických_příkladů_2
                         //zobrazení čísel a znaménka pro uživatele
                         labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
-                        labelZnaménko.Text =(":");
+                        labelZnaménko.Text =("/");
 
 
                         labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
@@ -1176,7 +1201,7 @@ namespace Generátor_matematických_příkladů_2
             }
             if (checkBoxNásobit.Checked == true)
             {
-                znaménkoHistorie += "x,";
+                znaménkoHistorie += "*,";
             }
             else
             {
@@ -1184,7 +1209,7 @@ namespace Generátor_matematických_příkladů_2
             }
             if (checkBoxDělit.Checked == true)
             {
-                znaménkoHistorie += ":,";
+                znaménkoHistorie += "/,";
             }
             else
             {
@@ -1320,7 +1345,7 @@ namespace Generátor_matematických_příkladů_2
                         //zobrazení čísel a znaménka pro uživatele
                         labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
-                        labelZnaménko.Text =("x");
+                        labelZnaménko.Text =("*");
                         labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
 
                         break;
@@ -1354,10 +1379,11 @@ namespace Generátor_matematických_příkladů_2
                         //zobrazení čísel a znaménka pro uživatele
                         labelPříkladČ1.Text = Convert.ToString(ČÍSLO1);
                         labelPříkladČ2.Text = Convert.ToString(ČÍSLO2);
-                        labelZnaménko.Text =(":");
-
+                        labelZnaménko.Text =("/");
 
                         labelVýsledek.Text = Convert.ToString(VÝSLEDEK);
+
+                        
 
                         break;
                     }

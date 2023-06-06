@@ -170,12 +170,13 @@
             this.textBoxVýsledek.BackColor = System.Drawing.Color.White;
             this.textBoxVýsledek.Font = new System.Drawing.Font("Consolas", 26.6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxVýsledek.Location = new System.Drawing.Point(280, 100);
-            this.textBoxVýsledek.MaxLength = 4;
+            this.textBoxVýsledek.MaxLength = 10;
             this.textBoxVýsledek.Name = "textBoxVýsledek";
             this.textBoxVýsledek.Size = new System.Drawing.Size(120, 49);
             this.textBoxVýsledek.TabIndex = 6;
             this.textBoxVýsledek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxVýsledek.Visible = false;
+            this.textBoxVýsledek.TextChanged += new System.EventHandler(this.textBoxVýsledek_TextChanged);
             // 
             // labelPříkladČ1
             // 
@@ -620,7 +621,7 @@
             this.gBnastavení.Controls.Add(this.buttonUložNastavení);
             this.gBnastavení.Location = new System.Drawing.Point(0, 24);
             this.gBnastavení.Name = "gBnastavení";
-            this.gBnastavení.Size = new System.Drawing.Size(624, 188);
+            this.gBnastavení.Size = new System.Drawing.Size(350, 188);
             this.gBnastavení.TabIndex = 33;
             this.gBnastavení.TabStop = false;
             this.gBnastavení.Text = "Nastavení   iamtheone";
